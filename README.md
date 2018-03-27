@@ -9,5 +9,5 @@ These codes are licensed under CC0.
 
 ## Sample
 //使い方の一例  
-  const char32_t u32char=U"こんにちは！";  
+  const char32_t* u32char=U"こんにちは！";  
   printf("%s",utf8(u32char));  
