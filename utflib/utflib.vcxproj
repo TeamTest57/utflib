@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{1D297C95-A9FC-491F-86B5-46B1255B09E2}</ProjectGuid>
-    <RootNamespace>sjisutf8</RootNamespace>
+    <RootNamespace>utflib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

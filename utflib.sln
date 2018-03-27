@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sjisutf8", "sjisutf8\sjisutf8.vcxproj", "{1D297C95-A9FC-491F-86B5-46B1255B09E2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utflib", "utflib\utflib.vcxproj", "{1D297C95-A9FC-491F-86B5-46B1255B09E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
