@@ -83,5 +83,32 @@ int main()
 
 	//--------------------------------------------------
 
+	//Visual Studio
+	//SJIS (環境によっては異なる)
+	const std::string sstr = "こんにちはabcdef";
+	const char* scharP = "こんにちはabcdef";
+	const char schar = 'K';
+
+	//to_UTF-8--------------------------------------------------
+
+	std::cout << "\n[to_SJIS]\n" << std::endl;
+
+	//UTF-8
+	std::cout << utf8_s(sstr) << std::endl;
+	std::cout << utf8_s(scharP) << std::endl;
+	//std::cout << utf8_s(schar) << std::endl;
+
+	//UTF-16
+	std::cout << utf8(utf16_s(sstr)) << std::endl;
+	std::cout << utf8(utf16_s(scharP)) << std::endl;
+	//std::cout << utf8(utf16_s(schar)) << std::endl;
+
+	//UTF-32
+	std::cout << utf8(utf32_s(sstr)) << std::endl;
+	std::cout << utf8(utf32_s(scharP)) << std::endl;
+	//std::cout << utf8(utf32_s(schar)) << std::endl;
+
+	//--------------------------------------------------
+
 	return 0;
 }
