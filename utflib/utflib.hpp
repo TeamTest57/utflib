@@ -313,7 +313,8 @@ namespace utflib
 		for (size_t j = 0; j < src_len;) {
 			if (src[j] == 0) break;
 			u32str += char_utf32(src, u8char, j, number_of_byte);
-			j += number_of_byte;
+			if(number_of_byte) j += number_of_byte;
+			else ++j;
 		}
 		return u32str.c_str();
 	}
@@ -346,9 +347,11 @@ namespace utflib
 		char u8char[5]{};
 		int32_t number_of_byte;
 
-		for (size_t j = 0;; j += number_of_byte) {
+		for (size_t j = 0;;) {
 			if (src[j] == 0) break;
 			u32str += char_utf32(src, u8char, j, number_of_byte);
+			if (number_of_byte) j += number_of_byte;
+			else ++j;
 		}
 		return u32str.c_str();
 	}
@@ -455,11 +458,28 @@ namespace utflib
 		return u16str.c_str();
 	}
 
+	// SJIS(char) から UTF-16(char16_t*)へ
+	const char16_t* utf16_s(const char src)
+	{
+		static std::u16string u16str;
+		u16str = u"";
+
+		const uint8_t src_8 = uint8_t(src);
+
+		if (src_8 <= 127) u16str += char16_t(src);
+		else if (src_8 >= 161 && src_8 <= 223) u16str += char16_t(src_8 - 161) + 0xff61;
+
+		return u16str.c_str();
+	}
+
 	// SJIS(string) から UTF-16(char16_t*)へ
 	const char16_t* utf16_s(const std::string src) { return utf16_s(src.c_str()); }
 
 	// SJIS(char*) から UTF-8(char*)へ
 	const char* utf8_s(const char* src) { return utf8(utf16_s(src)); }
+
+	// SJIS(char) から UTF-8(char*)へ
+	const char* utf8_s(const char src) { return utf8(utf16_s(src)); }
 
 	// SJIS(string) から UTF-8(char*)へ
 	const char* utf8_s(const std::string src) { return utf8(utf16_s(src.c_str())); }
@@ -469,5 +489,24 @@ namespace utflib
 
 	// SJIS(string) から UTF-32(char*)へ
 	const char32_t* utf32_s(const std::string src) { return utf32(utf16_s(src.c_str())); }
+
+	// SJIS(char) から UTF-32(char32_t*)へ
+	const char32_t* utf32_s(const char src) { return utf32(utf16_s(src)); }
+
+	// 数値 から UTF-8(char*)へ
+	template <typename type_name>
+	const char* utf8(type_name src) {
+		static std::string u8str;
+		u8str = std::to_string(src);
+		return u8str.c_str();
+	}
+
+	// 数値 から UTF-16(char16_t*)へ
+	template <typename type_name>
+	const char16_t* utf16(type_name src) { return utf16(utf8(src)); }
+
+	// 数値 から UTF-32(char32_t*)へ
+	template <typename type_name>
+	const char32_t* utf32(type_name src) { return utf32(utf8(src)); }
 
 }
